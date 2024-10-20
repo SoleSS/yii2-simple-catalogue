@@ -10,8 +10,8 @@ class m241020_111200_create_relation_tables extends Migration
     {
         $this->createTable('catalogue_item_category', [
             'catalogue_item_id' => $this->integer()->notNull()->comment('id Элемента'),
-            'catalogues_category_id' => $this->integer()->notNull()->comment('id Категории'),
-            'PRIMARY KEY(catalogues_category_id, catalogue_item_id)',
+            'catalogue_category_id' => $this->integer()->notNull()->comment('id Категории'),
+            'PRIMARY KEY(catalogue_category_id, catalogue_item_id)',
         ]);
 
         $this->createIndex('idx-catalogue_item_category-catalogue_item_id', 'catalogue_item_category', 'catalogue_item_id');
