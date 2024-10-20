@@ -47,5 +47,15 @@ namespace soless\catalogue\models;
  */
 class CatalogueItem extends base\CatalogueItem
 {
-
+    public function getUser() {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+    public function getCategories()
+    {
+        return $this->hasMany(CatalogueCategory::class, ['id' => 'catalogue_category_id'])->viaTable('catalogue_item_category', ['catalogue_item_id' => 'id']);
+    }
+    public function getTags()
+    {
+        return $this->hasMany(CatalogueTag::class, ['id' => 'catalogue_tag_id'])->viaTable('catalogue_item_tag', ['catalogue_item_id' => 'id']);
+    }
 }
