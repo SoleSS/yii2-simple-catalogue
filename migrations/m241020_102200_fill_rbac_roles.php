@@ -1,7 +1,4 @@
 <?php
-
-namespace soless\catalogue\migrations;
-
 use yii\db\Migration;
 
 /**

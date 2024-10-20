@@ -1,24 +1,24 @@
-# yii2-simple-cms
+# yii2-simple-catalogue
 
 ## Installation
 
-composer require --prefer-dist soless/yii2-simple-cms "*"
+composer require --prefer-dist soless/yii2-simple-catalogue "*"
 
-php yii migrate/up --migrationPath=@vendor/soless/yii2-simple-cms/migrations
+php yii migrate/up --migrationPath=@vendor/soless/yii2-simple-catalogue/migrations
 
 add to config:
 ```
     'modules' => [
-        'cms' => [
-            'class' => '\soless\cms\Module',
+        'catalogue' => [
+            'class' => '\soless\catalogue\Module',
         ]
     ],
 ```
 
 ## Available CRUD controllers:
 
-cms/cms-article
+catalogue/item
 
-cms/cms-category
+catalogue/category
 
-cms/cms-tag
+catalogue/tag

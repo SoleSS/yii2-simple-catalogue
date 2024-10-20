@@ -1,7 +1,4 @@
 <?php
-
-namespace soless\catalogue\migrations;
-
 use yii\db\Migration;
 
 class m241020_100030_create_catalogue_item_table extends Migration
