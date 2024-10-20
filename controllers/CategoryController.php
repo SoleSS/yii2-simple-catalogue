@@ -1,6 +1,6 @@
 <?php
 
-namespace soless\cms\controllers;
+namespace soless\catalogue\controllers;
 
 use soless\catalogue\models\CatalogueCategory;
 use Yii;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CmsCategoryController implements the CRUD actions for CmsCategory model.
  */
-class CmsCategoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -77,7 +77,6 @@ class CmsCategoryController extends Controller
     {
         $model = new CatalogueCategory();
 
-        $model->allowed_access_roles = ['all'];
         $model->created_at = date('Y-m-d H:i:s');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace soless\cms\controllers;
+namespace soless\catalogue\controllers;
 
 use Yii;
-use soless\cms\models\CmsTag;
+use soless\catalogue\models\CatalogueTag;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CmsTagController implements the CRUD actions for CmsTag model.
  */
-class CmsTagController extends Controller
+class TagController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class CmsTagController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => CmsTag::find(),
+            'query' => CatalogueTag::find(),
         ]);
 
         return $this->render('index', [
@@ -75,7 +75,7 @@ class CmsTagController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CmsTag();
+        $model = new CatalogueTag();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -124,12 +124,12 @@ class CmsTagController extends Controller
      * Finds the CmsTag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CmsTag the loaded model
+     * @return CatalogueTag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CmsTag::findOne($id)) !== null) {
+        if (($model = CatalogueTag::findOne($id)) !== null) {
             return $model;
         }
 
@@ -144,6 +144,6 @@ class CmsTagController extends Controller
      */
     public function actionSuggest($term) {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return CmsTag::find()->select('title')->filterWhere(['like', 'title', $term.'%', false])->column();
+        return CatalogueTag::find()->select('title')->filterWhere(['like', 'title', $term.'%', false])->column();
     }
 }

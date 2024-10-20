@@ -1,7 +1,9 @@
 <?php
 
-namespace soless\cms\controllers;
+namespace soless\catalogue\controllers;
 
+use soless\catalogue\models\CatalogueItem;
+use soless\catalogue\models\CatalogueItemSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -11,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CmsArticleController implements the CRUD actions for CmsArticle model.
  */
-class CmsArticleController extends Controller
+class ItemController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -45,7 +47,7 @@ class CmsArticleController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CmsArticleSearch();
+        $searchModel = new CatalogueItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -74,10 +76,9 @@ class CmsArticleController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CmsArticle();
+        $model = new CatalogueItem();
 
         $model->priority = 500;
-        $model->allowed_access_roles = ['all'];
         $model->created_at = date('Y-m-d H:i:s');
         $model->publish_up = date('Y-m-d H:i:s');
         $model->publish_down = date('Y-m-d H:i:s', strtotime('+10 years'));
@@ -129,12 +130,12 @@ class CmsArticleController extends Controller
      * Finds the CmsArticle model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CmsArticle the loaded model
+     * @return CatalogueItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CmsArticle::findOne($id)) !== null) {
+        if (($model = CatalogueItem::findOne($id)) !== null) {
             return $model;
         }
 
