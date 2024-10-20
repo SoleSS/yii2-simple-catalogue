@@ -44,9 +44,21 @@ namespace soless\catalogue\models;
  * @property string|null $carousel_params Параметры карусели
  * @property string|null $carousel_slides Слайды карусели
  * @property string|null $custom_params Специальные параметры
+ *
+ * @property-read string $statusText
+ * @property-read User $user
+ * @property-read CatalogueCategory[] $categories
+ * @property-read CatalogueTag[] $tags
  */
 class CatalogueItem extends base\CatalogueItem
 {
+    const STATUSES = [
+        0 => 'Неактивен',
+        1 => 'Доступен',
+    ];
+    public function getStatusText() {
+        return isset(static::STATUSES[$this->status]) ? static::STATUSES[$this->status] : '-';
+    }
     public function getUser() {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }

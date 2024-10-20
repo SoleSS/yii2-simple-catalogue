@@ -13,5 +13,7 @@ namespace soless\catalogue\models;
  */
 class CatalogueCategory extends base\CatalogueCategory
 {
-
+    public static function asArray() {
+        return \yii\helpers\ArrayHelper::map(static::find()->select(['id', 'title'])->asArray()->all(), 'id', 'title');
+    }
 }

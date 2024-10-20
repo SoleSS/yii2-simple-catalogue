@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function(CatalogueItem $model){
                     return $model->statusText;
                 },
-                'filter' => CatalogueItem::statuses,
+                'filter' => CatalogueItem::STATUSES,
             ],
             [
                 'attribute' => 'publish_up',
