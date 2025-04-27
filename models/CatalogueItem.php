@@ -52,9 +52,17 @@ namespace soless\catalogue\models;
  */
 class CatalogueItem extends base\CatalogueItem
 {
+    const UNPUBLISHED_STATE = 0;
+    const PUBLISHED_STATE = 1;
     const STATUSES = [
-        0 => 'Неактивен',
-        1 => 'Доступен',
+        self::UNPUBLISHED_STATE => 'Неактивен',
+        self::PUBLISHED_STATE => 'Доступен',
+    ];
+
+
+    const GOODS = 1;
+    const TYPES = [
+        self::GOODS => 'Товары',
     ];
     public function getStatusText() {
         return isset(static::STATUSES[$this->status]) ? static::STATUSES[$this->status] : '-';
