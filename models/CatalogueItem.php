@@ -53,7 +53,7 @@ namespace soless\catalogue\models;
 class CatalogueItem extends base\CatalogueItem
 {
     public $selectedCategories = [];
-    public $selectedTags = [];
+    public $selectedTags = '';
 
     public function rules()
     {
