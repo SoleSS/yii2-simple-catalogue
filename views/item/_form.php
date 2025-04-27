@@ -28,7 +28,7 @@ use \soless\catalogue\models\CatalogueItem;
 
     <?= $form->field($model, 'priority')->textInput(['placeholder' => 500]) ?>
 
-    <?php echo $form->field($model, 'image')->widget(InputFile::class, [
+    <?php echo $form->field($model, 'image_params[path]')->widget(InputFile::class, [
         'language'      => 'ru',
         'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
         'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes

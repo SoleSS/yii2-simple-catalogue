@@ -52,6 +52,17 @@ namespace soless\catalogue\models;
  */
 class CatalogueItem extends base\CatalogueItem
 {
+    public function beforeValidate()
+    {
+        if ($this->isNewRecord) {
+            $this->user_id = \Yii::$app->user->id;
+            $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
+        }
+        $this->updated_at = date('Y-m-d H:i:s');
+
+        return parent::beforeValidate();
+    }
+
     const UNPUBLISHED_STATE = 0;
     const PUBLISHED_STATE = 1;
     const STATUSES = [
