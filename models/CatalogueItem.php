@@ -54,12 +54,13 @@ class CatalogueItem extends base\CatalogueItem
 {
     public $selectedCategories = [];
     public $selectedTags = '';
+    public $batchGallery = '';
 
     public function rules()
     {
         $rules = parent::rules();
         $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
-        $rules[] = [['selectedTags', ], 'string'];
+        $rules[] = [['selectedTags', 'batchGallery', ], 'string'];
 
         return $rules;
     }
@@ -69,6 +70,7 @@ class CatalogueItem extends base\CatalogueItem
         $labels = parent::attributeLabels();
         $labels['selectedCategories'] = 'Категории';
         $labels['selectedTags'] = 'Теги';
+        $labels['batchGallery'] = 'Массовое добавление фото';
 
         return $labels;
     }
