@@ -48,6 +48,7 @@ namespace soless\catalogue\models;
  * @property-read string $statusText
  * @property-read User $user
  * @property-read CatalogueCategory[] $categories
+ * @property-read array $categoriesList
  * @property-read CatalogueTag[] $tags
  */
 class CatalogueItem extends base\CatalogueItem

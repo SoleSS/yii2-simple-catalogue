@@ -44,22 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \yii\helpers\StringHelper::truncate($model->title, 70);
                 }
             ],
-            //'title_lng1',
-            //'title_lng2',
-            /*[
-                'attribute' => 'type_id',
-                'format' => 'text',
-                'content' => function(CmsArticle $model){
-                    return $model->typeName;
-                },
-                'filter' => CmsArticle::TYPE_NAME,
-            ],*/
             [
                 'attribute' => 'category_id',
                 'contentOptions' => ['style' => 'width:150px'],
                 'label' => 'Категория',
                 'content' => function(CatalogueItem $model) {
-                    return implode(', ', $model->cmsCategoriesList);
+                    return implode(', ', $model->categoriesList);
                 },
                 'filter' => \soless\catalogue\models\CatalogueCategory::asArray(),
             ],
