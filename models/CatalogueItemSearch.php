@@ -58,7 +58,6 @@ class CatalogueItemSearch extends CatalogueItem
     public function rules()
     {
         return [
-            [['title', 'intro', 'full', 'publish_up', 'publish_down', 'created_at', 'updated_at'], 'required'],
             [['type_id', 'base_price_value', 'status', 'user_id', 'hits', 'priority'], 'default', 'value' => null],
             [['type_id', 'base_price_value', 'status', 'user_id', 'hits', 'priority', 'category_id'], 'integer'],
             [['image_params', 'price_params', 'publish_up', 'publish_down', 'medias', 'gallery', 'created_at', 'updated_at', 'params', 'promo_image_params', 'carousel_params', 'carousel_slides', 'custom_params'], 'safe'],
