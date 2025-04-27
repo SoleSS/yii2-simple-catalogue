@@ -53,13 +53,78 @@ namespace soless\catalogue\models;
 class CatalogueItem extends base\CatalogueItem
 {
     public $selectedCategories = [];
+    public $selectedTags = [];
 
     public function rules()
     {
         $rules = parent::rules();
         $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
+        $rules[] = [['selectedTags', ], 'string'];
 
         return $rules;
+    }
+
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['selectedCategories'] = 'Категории';
+        $labels['selectedTags'] = 'Теги';
+
+        return $labels;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+
+        $this->setCategories();
+        $this->setTags();
+    }
+    public function afterFind()
+    {
+        $this->selectedCategories = \yii\helpers\ArrayHelper::getColumn($this->categories, 'id');
+        $this->selectedTags = implode(',', \yii\helpers\ArrayHelper::getColumn($this->tags, 'title'));
+
+        parent::afterFind();
+    }
+
+
+    public function getCategoriesList () {
+        return \yii\helpers\ArrayHelper::map($this->categories, 'id', 'title');
+    }
+    private function setCategories() {
+        $this->unlinkAll('categories', true);
+        if (!empty($this->selectedCategories)) foreach ($this->selectedCategories as $id) {
+            $category = CatalogueCategory::findOne($id);
+            $this->link('categories', $category);
+        }
+
+        return true;
+    }
+
+    private function setTags() {
+        $this->unlinkAll('tags', true);
+        $tags = $this->selectedTags;
+        if (!is_array($this->selectedTags)) {
+            $tags = explode(',', $this->selectedTags);
+        }
+
+        if (!empty($tags)) foreach ($tags as $title) {
+            if (!empty($title)) {
+                if ( CatalogueTag::find()->where( [ 'title' => $title ] )->exists() )
+                    $tag = CatalogueTag::find()->where(['title' => $title])->limit(1)->one();
+                else {
+                    $tag = new CatalogueTag();
+                    $tag->title = $title;
+                    $tag->description = '';
+                    $tag->priority = 10;
+                    $tag->save();
+                }
+
+                $this->link('tags', $tag);
+            }
+        }
+
+        return true;
     }
     public function beforeValidate()
     {
