@@ -132,6 +132,7 @@ class CatalogueItem extends base\CatalogueItem
     {
         if ($this->isNewRecord) {
             $this->user_id = \Yii::$app->user->id;
+            $this->hits = 0;
             $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
         }
         $this->updated_at = date('Y-m-d H:i:s');
