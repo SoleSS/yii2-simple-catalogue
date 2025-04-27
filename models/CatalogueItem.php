@@ -52,6 +52,15 @@ namespace soless\catalogue\models;
  */
 class CatalogueItem extends base\CatalogueItem
 {
+    public $selectedCategories = [];
+
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules[] = ['selectedCategories', 'each', 'rule' => ['integer']];
+
+        return $rules;
+    }
     public function beforeValidate()
     {
         if ($this->isNewRecord) {
