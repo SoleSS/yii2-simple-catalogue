@@ -154,10 +154,11 @@ class CatalogueItem extends base\CatalogueItem
         if ($leadImageUrl) {
             try {
                 list($width, $height, $type, $attr) = $this->getImageParams($leadImageUrl);
+                $leadImageParams['width'] = $width;
+                $leadImageParams['height'] = $height;
             } catch (\Exception $exception) {}
 
-            $this->image_params['width'] = $width;
-            $this->image_params['height'] = $height;
+            $this->image_params = $leadImageParams;
         }
 
         return parent::beforeValidate();
