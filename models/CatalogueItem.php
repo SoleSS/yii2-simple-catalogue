@@ -2,6 +2,8 @@
 
 namespace soless\catalogue\models;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "catalogue_item".
  *
@@ -129,6 +131,15 @@ class CatalogueItem extends base\CatalogueItem
 
         return true;
     }
+
+    private function getImageParams($filePath) {
+        $imageSize = [];
+        if (file_exists((\Yii::$app->params['frontendFilesRoot'] ?? '') . $filePath)) {
+            $imageSize = getimagesize((\Yii::$app->params['frontendFilesRoot'] ?? '') . $filePath);
+        }
+
+        return $imageSize;
+    }
     public function beforeValidate()
     {
         if ($this->isNewRecord) {
@@ -137,6 +148,17 @@ class CatalogueItem extends base\CatalogueItem
             $this->created_at = $this->created_at ?? date('Y-m-d H:i:s');
         }
         $this->updated_at = date('Y-m-d H:i:s');
+
+        $leadImageParams = $this->image_params;
+        $leadImageUrl = ArrayHelper::getValue($leadImageParams, 'path');
+        if ($leadImageUrl) {
+            try {
+                list($width, $height, $type, $attr) = $this->getImageParams($leadImageUrl);
+            } catch (\Exception $exception) {}
+
+            $this->image_params['width'] = $width;
+            $this->image_params['height'] = $height;
+        }
 
         return parent::beforeValidate();
     }
